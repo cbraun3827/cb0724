@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class RentalAgreement {
-    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yy");
+    private DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MM/dd/yy");
 
     private Tool tool;
     private int rentalDays;
