@@ -23,13 +23,6 @@ public class RentalAgreement {
     private Double discountAmount;
     private Double finalCharge;
 
-    public RentalAgreement(Tool tool, int rentalDays, LocalDate checkoutDate, int discountPercent) {
-        this.tool = tool;
-        this.rentalDays = rentalDays;
-        this.checkoutDate = checkoutDate;
-        this.discountPercent = discountPercent;
-    }
-
     public RentalAgreement() {
     }
 
