@@ -3,17 +3,16 @@ package com.toolrental.service;
 import com.toolrental.entity.RentalAgreement;
 import com.toolrental.entity.Tool;
 
-import java.io.IOException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 
 public class CheckoutService {
     public RentalAgreement checkout(String toolCode, LocalDate checkoutDate, int rentalDays, int discountPercent) {
-        if(rentalDays < 1) {
+        if (rentalDays < 1) {
             throw new IllegalArgumentException("Rental days must be greater than 0");
         }
-        if(discountPercent < 0 || discountPercent > 100) {
+        if (discountPercent < 0 || discountPercent > 100) {
             throw new IllegalArgumentException("Discount percent must be between 0 and 100");
         }
 
@@ -35,13 +34,13 @@ public class CheckoutService {
 
     private int calculateChargeDays(Tool tool, LocalDate checkoutDate, int rentalDays) {
         int chargeDays = 0;
-        for(int i = 1; i <= rentalDays; i++) {
+        for (int i = 1; i <= rentalDays; i++) {
             LocalDate currentDate = checkoutDate.plusDays(i);
-            if(isWeekday(currentDate) && !isHoliday(currentDate) && tool.isWeekdayCharge()) {
+            if (isWeekday(currentDate) && !isHoliday(currentDate) && tool.isWeekdayCharge()) {
                 chargeDays++;
-            } else if(!isWeekday(currentDate) && tool.isWeekendCharge()) {
+            } else if (!isWeekday(currentDate) && tool.isWeekendCharge()) {
                 chargeDays++;
-            } else if(isHoliday(currentDate) && tool.isHolidayCharge()) {
+            } else if (isHoliday(currentDate) && tool.isHolidayCharge()) {
                 chargeDays++;
             }
         }
@@ -53,7 +52,7 @@ public class CheckoutService {
     }
 
     private boolean isHoliday(LocalDate currentDate) {
-        if(isFourthOfJuly(currentDate) || isLaborDay(currentDate)){
+        if (isFourthOfJuly(currentDate) || isLaborDay(currentDate)) {
             return true;
         }
         return false;
